@@ -15,12 +15,23 @@
 let hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 
 // *********************UTILITIES*************************************************
-
-function rngCookies(minCust,maxCust){
-  //found on MDN docs
+function rngCookies(minCust, maxCust) {
+  minCust = Math.ceil(minCust);
+  maxCust = Math.floor(maxCust);
   return Math.floor(Math.random() * (maxCust - minCust +1) + minCust);
 }
 
+//found on MDN docs
+let cph = 0;
+
+function rngHourly(){
+  for(let i = 0; i < hours.length; i++){
+    cph = [rngCookies[i]];
+    return cph;
+    //let cphArray= [cph];
+    //return cphArray;
+  }
+}
 
 // objectTemplate
 // let ={
@@ -38,7 +49,10 @@ let tokyo ={
   maxCust: 24,
   avgCookiesBought: 1.2,
   cookiesBought: [],
+  customerPerHour: rngHourly(3,24),
 };
+
+console.log(tokyo);
 
 let seattle ={
   name: 'Seattle',
