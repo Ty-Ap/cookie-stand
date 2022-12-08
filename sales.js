@@ -22,55 +22,72 @@ let storeSection = document.getElementById('stores');
 
 //*********************CONSTRUCTOR FUNCTION
 
-function Store(name,minCust,maxCust,avgCookiesBought,customerPerHour,cookieSales){
+function Store(name,minCust,maxCust,avgCookiesBought){
   this.name = name;
   this.minCust = minCust;
   this.maxCust = maxCust;
   this.avgCookiesBought = avgCookiesBought;
   this.total = 0;
-  this.customerPerHour = customerPerHour;
-  this.cookieSales = cookieSales;
+  this.cookieSales = [];
   this.hours = hours;
 }
 
 //***********PROTOTYPE METHODS....I HOPE
 
-// Store.prototype.getCust = function () {
-//   this.total = `${this.name} had ${randomCust(this.minCust,this.maxCust)} today`;
-//   return
-// };
+Store.prototype.getCust = function () {
+  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) +this.minCust);
+};
 
+Store.prototype.cookieHr = function (){
+  for(let i=0; i < hours.length; i++){
+    let cookies = Math.ceil(this.getCust()*this.avgCookiesBought);
+    this.cookieSales.push(cookies);
+    this.total += cookies;
+  }
+};
 
 
 Store.prototype.render = function(){
-  let articleElem = document.createElement('article');
-  storeSection.appendChild(articleElem);
+  this.cookieHr();
 
-  let h2Elem = document.createElement('h2');
-  h2Elem.innerText = this.name;
-  articleElem.appendChild(h2Elem);
+  let row = document.createElement('tr');
+  storeSection.appendChild(row);
 
-  let ulElem = document.createElement('ul');
-  ulElem.innerText = this.minCust;
-  articleElem.appendChild(ulElem);
+  let cell = document.createElement('td');
+  cell.textContent = this.name;
+  row.appendChild(cell);
+  for(let i = 0; i < hours.length; i++ ){
+    let cell = document.createElement('td');
+    cell.textContent = this.cookieSales[i];
+    row.appendChild(cell);
+  }
 
-  let p2Elem = document.createElement('p2');
-  p2Elem.innerText = this.maxCust;
-  articleElem.appendChild(p2Elem);
-
-  let p3Elem = document.createElement('p3');
-  p3Elem.innerText = this.avgCookiesBought;
-  articleElem.appendChild(p3Elem);
-
-  let p4Elem = document.createElement('p4');
-  p4Elem.innertext = this.total;
-  articleElem.appendChild(p4Elem);
-
-  let p5Elem = document.createElement('p5');
-  p5Elem.innerText = this.total;
-  articleElem.appendChild(p5Elem);
+  let total = document.createElement('td');
+  total.textContent = this.total;
+  row.appendChild(total);
 };
 
+let header = function(){
+
+  let row = document.createElement('tr');
+  storeSection.appendChild(row);
+
+  let cell = document.createElement('td');
+  cell.textContent = '';
+  row.appendChild(cell);
+  for(let i = 0; i < hours.length; i++ ){
+    let cell = document.createElement('td');
+    cell.textContent = hours[i];
+    row.appendChild(cell);
+  }
+
+  let total = document.createElement('td');
+  total.textContent = 'total';
+  row.appendChild(total);
+};
+
+header();
+// footer almost same but after renderall, w nested for loop
 
 let tokyo = new Store('Tokyo',3,24,1.2);
 let seattle = new Store('Seattle',23,65,6.3);
