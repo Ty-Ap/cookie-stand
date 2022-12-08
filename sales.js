@@ -16,72 +16,43 @@ let storeArray = [];
 //WINDOW INTO DOM TEST
 let storeSection = document.getElementById('stores');
 
-function header(){
-  let trElem = document.createElement('tr');
-  storeSection.appendChild(trElem);
+// *********************UTILITIES*************************************************
 
-  let thElem = document.createElement('th');
-  thElem.textContent = 'stores';
-  trElem.appendChild(thElem);
-
-  for (let j = 0; j < hours.length; j++) {
-    thElem = document.createElement('th');
-    thElem.textContent = hours[j];
-    trElem.appendChild(thElem);
-  }
-  thElem = document.createElement('th');
-  thElem.textContent = 'total';
-  trElem.appendChild(thElem);
-}
-
-header();
-
-Store.prototype.render = function() {
-
-  console.dir('stores', storeSection);
-  let trElem = document.createElement('tr');
-  storeSection.appendChild(trElem);
-
-  let tdElem = document.createElement('td');
-  tdElem.textContent = this.name;
-  trElem.appendChild(tdElem);
-
-  for (let i = 0; i < hours.length; i++) {
-    let tableData = document.createElement('td');
-    tableData.textContent = this.cookiesBought[i];
-    console.log(this.cookiesBought[i]);
-
-    trElem.appendChild(tableData);
-
-  }
-  let totalTableData = document.createElement('td');
-  totalTableData.textContent = this.total;
-  trElem.appendChild(totalTableData);
-};
-
-let grandTotals = document.createElement('tr');
-storeSection.appendChild(grandTotals);
 
 
 //*********************CONSTRUCTOR FUNCTION
 
 function Store(name,minCust,maxCust,avgCookiesBought){
+function Store(name,minCust,maxCust,avgCookiesBought){
   this.name = name;
   this.minCust = minCust;
   this.maxCust = maxCust;
-  this.avgCookiesBought = [];
+  this.avgCookiesBought = avgCookiesBought;
   this.total = 0;
+  this.cookieSales = [];
+  this.hours = hours;
 }
 
 //***********PROTOTYPE METHODS....I HOPE
 
-// Store.prototype.getCust = function () {
-//   this.total = `${this.name} had ${randomCust(this.minCust,this.maxCust)} today`;
-//   return
-// };
+Store.prototype.getCust = function () {
+  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) +this.minCust);
+};
+
+Store.prototype.cookieHr = function (){
+  for(let i=0; i < hours.length; i++){
+    let cookies = Math.ceil(this.getCust()*this.avgCookiesBought);
+    this.cookieSales.push(cookies);
+    this.total += cookies;
+  }
+};
 
 
+Store.prototype.render = function(){
+  this.cookieHr();
 
+  let row = document.createElement('tr');
+  storeSection.appendChild(row);
 
 
 let Tokyo = new Store('Tokyo',3,24,1.2,[],0);
@@ -94,48 +65,62 @@ let Lima = new Store('Lima',2,16,4.6,[],0);
 storeArray.push=[Tokyo, Seattle, Dubai, Paris, Lima ];
 
 
+  let cell = document.createElement('td');
+  cell.textContent = this.name;
+  row.appendChild(cell);
+  for(let i = 0; i < hours.length; i++ ){
+    let cell = document.createElement('td');
+    cell.textContent = this.cookieSales[i];
+    row.appendChild(cell);
+  }
 // storeArray = [{Tokyo}, {Seattle}];
 
-
-
-// function renderAll(){
-//   for(let i = 0;i<storeArray.length; i++){
-//     // renderHelper[i].randomCust();
-//     storeArray[i].render();
-//   }
-// }
-
-// renderAll();
-
-Store.prototype.getRandomInt = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  let total = document.createElement('td');
+  total.textContent = this.total;
+  row.appendChild(total);
 };
 
+let header = function(){
 
-Store.prototype.cookieSales = function () {
-  for (let i = 0; i < hours.length; i++) {
-    let avgCookie = Math.floor(this.getRandomInt(this.minCust, this.maxCust) * this.avgCookiesBought);
-    this.cookiesBought.push(avgCookie);
-    this.total = this.total + this.cookiesBought[i];
+  let row = document.createElement('tr');
+  storeSection.appendChild(row);
+
+  let cell = document.createElement('td');
+  cell.textContent = '';
+  row.appendChild(cell);
+  for(let i = 0; i < hours.length; i++ ){
+    let cell = document.createElement('td');
+    cell.textContent = hours[i];
+    row.appendChild(cell);
   }
+
+  let total = document.createElement('td');
+  total.textContent = 'total';
+  row.appendChild(total);
 };
 
+header();
+// footer almost same but after renderall, w nested for loop
 
-Seattle.cookieSales();
-Tokyo.cookieSales();
-Dubai.cookieSales();
-Paris.cookieSales();
-Lima.cookieSales();
-
-Seattle.render();
-Tokyo.render();
-Dubai.render();
-Paris.render();
-Lima.render();
+let tokyo = new Store('Tokyo',3,24,1.2);
+let seattle = new Store('Seattle',23,65,6.3);
+let dubai = new Store('Dubai',11,38,3.7);
+let paris = new Store('Paris',20,38.,2.3);
+let lima = new Store('Lima',2,16,4.6);
 
 
-console.log(Seattle);
-console.log(Tokyo);
-console.log(Dubai);
-console.log(Paris);
-console.log(Lima);
+storeArray.push(tokyo, seattle, dubai, paris, lima );
+
+//storeArray = [{tokyo}, {seattle}];
+
+
+
+function renderAll(){
+  for(let i = 0;i<storeArray.length; i++){
+    // renderHelper[i].randomCust();
+    storeArray[i].render();
+  }
+}
+
+renderAll();
+
