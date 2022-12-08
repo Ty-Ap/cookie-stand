@@ -89,11 +89,11 @@ let header = function(){
 header();
 // footer almost same but after renderall, w nested for loop
 
-let tokyo = new Store('Tokyo',3,24,1.2);
-let seattle = new Store('Seattle',23,65,6.3);
-let dubai = new Store('Dubai',11,38,3.7);
-let paris = new Store('Paris',20,38.,2.3);
-let lima = new Store('Lima',2,16,4.6);
+let tokyo = new Store('Tokyo',3,24,1.2,[],0);
+let seattle = new Store('Seattle',23,65,6.3,[],0);
+let dubai = new Store('Dubai',11,38,3.7,[],0);
+let paris = new Store('Paris',20,38.,2.3,[],0);
+let lima = new Store('Lima',2,16,4.6,[],0);
 
 
 storeArray.push(tokyo, seattle, dubai, paris, lima );
