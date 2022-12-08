@@ -23,7 +23,6 @@ let storeSection = document.getElementById('stores');
 //*********************CONSTRUCTOR FUNCTION
 
 function Store(name,minCust,maxCust,avgCookiesBought){
-function Store(name,minCust,maxCust,avgCookiesBought){
   this.name = name;
   this.minCust = minCust;
   this.maxCust = maxCust;
@@ -54,17 +53,6 @@ Store.prototype.render = function(){
   let row = document.createElement('tr');
   storeSection.appendChild(row);
 
-
-let Tokyo = new Store('Tokyo',3,24,1.2,[],0);
-let Seattle = new Store('Seattle',23,65,6.3,[],0);
-let Dubai = new Store('Dubai',11,38,3.7,[],0);
-let Paris = new Store('Paris',20,38.,2.3,[],0);
-let Lima = new Store('Lima',2,16,4.6,[],0);
-
-
-storeArray.push=[Tokyo, Seattle, Dubai, Paris, Lima ];
-
-
   let cell = document.createElement('td');
   cell.textContent = this.name;
   row.appendChild(cell);
@@ -73,7 +61,6 @@ storeArray.push=[Tokyo, Seattle, Dubai, Paris, Lima ];
     cell.textContent = this.cookieSales[i];
     row.appendChild(cell);
   }
-// storeArray = [{Tokyo}, {Seattle}];
 
   let total = document.createElement('td');
   total.textContent = this.total;
@@ -123,4 +110,3 @@ function renderAll(){
 }
 
 renderAll();
-
