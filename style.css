@@ -17,6 +17,11 @@ tbody.tfoot{
   position: sticky;
 }
 
+img{
+  position:absolute;
+  bottom:0
+}
+
 header {
   display:flex;
 background-color: salmon;
