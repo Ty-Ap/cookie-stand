@@ -1,6 +1,6 @@
 th, td {
   border: 1px solid;
-  width: 100%;
+  width: auto;
   color: black;
   background-color:green;
   margin-top: 15px;
@@ -9,22 +9,73 @@ th, td {
 
 }
 
-table{
-  display:flex;
+main,footer,nav{
+  background-color: silver;
 }
 
+table{
+  float: left;
+}
+/* 
 tbody.tfoot{
   position: sticky;
+} */
+
+body{
+  background-color: olivedrab;
 }
 
-img{
-  position:absolute;
-  bottom:0
+#family{
+  display: flex;
+  width:300;
+  height: 200px;
+}
+
+p{
+  background-color: #fa8072;
+
+}
+
+nav,
+.scroll-container{
+  display: flex;
+  position: right;
+  margin: 0 auto;
+  text-align: left;
+}
+
+nav{
+  align-items: left;
+  width: 339px;
+  justify-content: center;
+  border: 10px #fa8072;
+}
+.scroll-container{
+  width: 350px;
+  height: 200px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  flex-direction: column;
+}
+
+
+.scroll-page{
+ align-items: left;
+ justify-content: center;
+}
+
+footer{
+  float: bottom;
 }
 
 header {
   display:flex;
-background-color: salmon;
-border-radius: 50px;
-border: 5px solid black;
+  background-color: salmon;
+  /* border-radius: 50px; */
+  border: 5px solid black;
+}
+
+.saleslink{
+  float: bottom;
 }
