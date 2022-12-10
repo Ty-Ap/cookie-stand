@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salmon Cookies</title>
-  </head>
-  <body>
-    <p><a href="https://ty-ap.github.io/cookie-stand/index.html">Home</a></p>
-    <table id ="stores"></table>
-        <!-- <footer>this is for later use</footer> -->
-    <script src="sales.js"></script>
-  </body>
+
+<head>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salmon Cookies</title>
+</head>
+
+<body>
+  <p><a href="https://ty-ap.github.io/cookie-stand/index.html">Home</a></p>
+    <table id="stores">
+
+    </table>
+  
+
+
+  <form id="store-builder">
+    <fieldset>
+      <legend>Store builder</legend>
+      <label for="userName">Name: </label>
+      <input name="userName" type="text" id="userName" placeholder="*****"></input>
+
+      <label>Minimum Customers:
+        <input type="text" name="min"></input>
+      </label>
+      <label>Maximum Customers:
+        <input type="text" name="max"></input>
+      </label>
+      <label>Average:
+        <input type="text" name="average"></input>
+      </label>
+
+    </fieldset>
+    <button type="submit">Submit</button>
+  </form>
+  <footer id="footer"></footer>
+  <script src="sales.js"></script>
+</body>
+
 </html>

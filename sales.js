@@ -6,21 +6,23 @@ let hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm
 
 let storeArray = [];
 
-// function randomCust(minCust,maxCust){
-//   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) +this.minCust);
-// }
 
-
-//^this is = kittenCaboodle on demo
 
 //WINDOW INTO DOM TEST
 let storeSection = document.getElementById('stores');
 
-// *********************UTILITIES*************************************************
+Store.prototype.getCust = function () {
+  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) +this.minCust);
+};
 
+Store.prototype.cookieHr = function (){
+  for(let i=0; i < hours.length; i++){
+    let cookies = Math.ceil(this.getCust()*this.avgCookiesBought);
+    this.cookieSales.push(cookies);
+    this.total += cookies;
+  }
+};
 
-
-//*********************CONSTRUCTOR FUNCTION
 
 function Store(name,minCust,maxCust,avgCookiesBought){
   this.name = name;
@@ -34,17 +36,7 @@ function Store(name,minCust,maxCust,avgCookiesBought){
 
 //***********PROTOTYPE METHODS....I HOPE
 
-Store.prototype.getCust = function () {
-  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) +this.minCust);
-};
 
-Store.prototype.cookieHr = function (){
-  for(let i=0; i < hours.length; i++){
-    let cookies = Math.ceil(this.getCust()*this.avgCookiesBought);
-    this.cookieSales.push(cookies);
-    this.total += cookies;
-  }
-};
 
 
 Store.prototype.render = function(){
@@ -86,6 +78,7 @@ let header = function(){
   row.appendChild(total);
 };
 
+
 header();
 // footer almost same but after renderall, w nested for loop
 
@@ -99,14 +92,71 @@ let lima = new Store('Lima',2,16,4.6,[],0);
 storeArray.push(tokyo, seattle, dubai, paris, lima );
 
 //storeArray = [{tokyo}, {seattle}];
+// document.getElementById('stores').addEventListener('submit', handleSubmit(''));
+
+// function handleSubmit(){
+
+//   this.event.preventDefault;
+//   // let useCapture=false;
+
+//   console.dir(event.target);
+//   let name = event.target.userName.value;
+//   console.log(name);
+
+//   let min = +event.target.minCust.value;
+//   console.log(min);
+
+//   let max = event.target.min.value;
+//   console.log;(max);
+
+//   let average = +event.target.average.value;
+//   console.log(average);
+
+//   let newStore = new Store(name, min, max, average );
+//   storeArray.push(newStore);
+//   console.log(newStore);
+
+//   document.getElementById('stores').deleteRow(-1);
+
+//   newStore.getCust();
+//   newStore.cookieHr();
+//   newStore.render();
+// }
 
 
 
 function renderAll(){
   for(let i = 0;i<storeArray.length; i++){
-    // renderHelper[i].randomCust();
     storeArray[i].render();
   }
 }
 
 renderAll();
+footer();
+function footer() {
+  let table = document.getElementById('stores');
+  let tr = document.createElement('tr');
+  let td = document.createElement('td');
+  td.textContent = 'totals';
+  tr.appendChild(td);
+  let grandTotal = 0;
+  for (let i = 0; i < hours.length; i++) {
+    let totalHours = 0;
+    for (let j = 0; j < storeArray.length; j++) {
+      totalHours = totalHours + storeArray[j].hours[i];
+      grandTotal = grandTotal + storeArray[i].cookies[j];
+    }
+    let td = document.createElement('td');
+    td.textContent = totalHours;
+    tr.appendChild(td);
+
+  }
+  let grandTotalcell = document.createElement('td');
+  grandTotalcell.textContent = grandTotal;
+  tr.appendChild(grandTotalcell);
+  table.appendChild(tr);
+}
+
+
+
+// trying to stop the table from refreshing, while still being able to add a new entry to be built//

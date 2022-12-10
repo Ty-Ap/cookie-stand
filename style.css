@@ -9,6 +9,7 @@ th, td {
 
 }
 
+
 main,footer,nav{
   background-color: silver;
 }
@@ -22,7 +23,7 @@ tbody.tfoot{
 } */
 
 body{
-  background-color: olivedrab;
+  background-color: silver;
 }
 
 #family{
@@ -33,6 +34,7 @@ body{
 
 p{
   background-color: #fa8072;
+  border: 2px solid black;
 
 }
 
@@ -70,12 +72,40 @@ footer{
 }
 
 header {
+  font-weight: 700;
+  height: max-content;
   display:flex;
-  background-color: salmon;
-  /* border-radius: 50px; */
+  background-color: olivedrab;
+  border-radius: 50px;
   border: 5px solid black;
 }
 
 .saleslink{
   float: bottom;
 }
+
+td{
+  font-family: Verdana, sans-serif;
+  color: black
+}
+
+#stores{
+  font-family: Verdana, sans-serif;
+  color: indigo;
+}
+
+body{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: black;
+}
+
+.highlight{
+  font-family: 'Zen Dots', cursive;
+  color: aqua;
+}
+
+h2{
+  background-color: #fa8072;
+  border: 3px solid black;
+}
+
