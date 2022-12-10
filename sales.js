@@ -116,7 +116,7 @@ function handleSubmit(event){
   storeArray.push(newStore);
   console.log(newStore);
 
-  document.getElementById('stores').deleteRow(-1);
+  // document.getElementById('stores').deleteRow(-1);
 
   newStore.getCust();
   newStore.cookieHr();
