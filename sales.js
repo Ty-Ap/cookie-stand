@@ -73,9 +73,9 @@ let header = function(){
     row.appendChild(cell);
   }
 
-  let total = document.createElement('td');
-  total.textContent = 'total';
-  row.appendChild(total);
+  let totalTitle = document.createElement('td');
+  totalTitle.textContent = 'total';
+  row.appendChild(totalTitle);
 };
 
 
@@ -92,38 +92,40 @@ let lima = new Store('Lima',2,16,4.6,[],0);
 storeArray.push(tokyo, seattle, dubai, paris, lima );
 
 //storeArray = [{tokyo}, {seattle}];
-// document.getElementById('stores').addEventListener('submit', handleSubmit(''));
-
-// function handleSubmit(){
-
-//   this.event.preventDefault;
-//   // let useCapture=false;
-
-//   console.dir(event.target);
-//   let name = event.target.userName.value;
-//   console.log(name);
-
-//   let min = +event.target.minCust.value;
-//   console.log(min);
-
-//   let max = event.target.min.value;
-//   console.log;(max);
-
-//   let average = +event.target.average.value;
-//   console.log(average);
-
-//   let newStore = new Store(name, min, max, average );
-//   storeArray.push(newStore);
-//   console.log(newStore);
-
-//   document.getElementById('stores').deleteRow(-1);
-
-//   newStore.getCust();
-//   newStore.cookieHr();
-//   newStore.render();
-// }
 
 
+
+function handleSubmit(event){
+
+  event.preventDefault();
+
+  console.dir(event.target);
+  let name = event.target.userName.value;
+  console.log(name);
+
+  let min = +event.target.min.value;
+  console.log(min);
+
+  let max = +event.target.max.value;
+  console.log;(max);
+
+  let average = +event.target.average.value;
+  console.log(average);
+
+  let newStore = new Store(name, min, max, average );
+  storeArray.push(newStore);
+  console.log(newStore);
+
+  document.getElementById('stores').deleteRow(-1);
+
+  newStore.getCust();
+  newStore.cookieHr();
+  newStore.render();
+  // could also use footer(); instead
+}
+
+
+document.getElementById('store-builder').addEventListener('submit', handleSubmit);
 
 function renderAll(){
   for(let i = 0;i<storeArray.length; i++){
@@ -132,19 +134,19 @@ function renderAll(){
 }
 
 renderAll();
-footer();
+
 function footer() {
   let table = document.getElementById('stores');
   let tr = document.createElement('tr');
   let td = document.createElement('td');
   td.textContent = 'totals';
   tr.appendChild(td);
-  let grandTotal = 0;
+  let grandTotal=0;
   for (let i = 0; i < hours.length; i++) {
     let totalHours = 0;
     for (let j = 0; j < storeArray.length; j++) {
-      totalHours = totalHours + storeArray[j].hours[i];
-      grandTotal = grandTotal + storeArray[i].cookies[j];
+      totalHours = totalHours + storeArray[j].cookieSales[i];
+      grandTotal =+ totalHours +storeArray[j].cookieSales[i];
     }
     let td = document.createElement('td');
     td.textContent = totalHours;
@@ -153,10 +155,12 @@ function footer() {
   }
   let grandTotalcell = document.createElement('td');
   grandTotalcell.textContent = grandTotal;
-  tr.appendChild(grandTotalcell);
+  table.appendChild(grandTotalcell);
   table.appendChild(tr);
 }
 
 
-
+// let grandTotalcell = document.createElement('td');
+// grandTotalcell.textContent = grandTotal;
+// tr.appendChild(grandTotalcell);
 // trying to stop the table from refreshing, while still being able to add a new entry to be built//
